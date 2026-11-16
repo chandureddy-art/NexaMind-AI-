@@ -23,10 +23,16 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
 
 load_dotenv()
+
 API_KEY = os.getenv("GEMINI_API_KEY")
-client =None
-if API_KEY:
-    client = genai.Client(api_key=API_KEY)
+
+if not API_KEY:
+    try:
+        API_KEY = st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        API_KEY = None
+
+client = None
 def get_ai_response(messages):
 
     if client is None:
