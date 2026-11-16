@@ -31,8 +31,6 @@ if not API_KEY:
         API_KEY = st.secrets["GEMINI_API_KEY"]
     except Exception:
         API_KEY = None
-
-client = None
 def get_ai_response(messages):
 
     if client is None:
